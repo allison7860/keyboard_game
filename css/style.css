@@ -1,0 +1,62 @@
+* {
+    box-sizing:border-box;
+}
+
+body {
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin:0;
+}
+
+.time {
+    position:fixed;
+    top:0;
+    right:0;
+    overflow:auto;
+    padding:10px;
+}
+
+#container {
+    width:600px;
+    margin:0 auto;
+}
+
+.keyboard, .col {
+    display:flex;
+    flex-wrap:wrap;
+    justify-content: center;
+    margin:1.5em 0;
+}
+
+.keys {
+    width:50px;
+    height:50px;
+    border:1px solid #000;
+    text-align: center;
+    padding-top:10px;
+    font-weight: bold;
+    box-shadow:2px 2px #000;
+}
+
+pre {
+    width:100%;
+    white-space: normal;
+    padding:2em 0;
+    font-size:15pt;
+    line-height:150%;
+}
+
+/* .keyboard:first-child .keys:nth-child(-n+10) {
+} */
+
+button {
+    display:inline-block;
+    margin-left:5px;
+    padding:5px;
+    background-color:rgb(101, 141, 88);
+    border:1px solid #000;
+    transition:background-color .2s ease-in;
+    cursor:pointer;
+}
+button:hover {
+    background-color:rgb(183, 219, 198);
+}
