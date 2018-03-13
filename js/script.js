@@ -17,6 +17,7 @@ var startGame = (function(){
     newAr.length = 0;
     arfinal.length = 0;
     var disabled = $('.startgame, .endgame').blur();
+    $('.time').html('');
     var methods = {
     start: 0,
     timer: (function() {
@@ -26,8 +27,9 @@ var startGame = (function(){
         var start = Date.now();
         thetimer = setInterval(function(){
             var newtime = Date.now() - start;
-            // console.log(newtime);
-            $('.time').html(newtime);
+            newtime = moment.duration(newtime).asSeconds();
+
+            $('.time').html(Math.round(newtime));
         }, 1000);
     })(),
     getSen: (function(){
@@ -45,18 +47,18 @@ var startGame = (function(){
             $('pre').append(picked_html)
         }
     })(),
-        letter: (function() {
-            var letter = picked.split('');
-            for (var i = 0; i < letter.length; i++) {
-                // Fixing "period" from ASCII to Key code 
-                if (letter[i].toUpperCase().charCodeAt(0) == 46) {
-                        newAr.push(190);
-                    } else {
-                    var lee = letter[i].toUpperCase().charCodeAt(0);
-                    newAr.push(lee);
-                    }
+    letter: (function() {
+        var letter = picked.split('');
+        for (var i = 0; i < letter.length; i++) {
+            // Fixing "period" from ASCII to Key code 
+            if (letter[i].toUpperCase().charCodeAt(0) == 46) {
+                    newAr.push(190);
+            } else {
+            var lee = letter[i].toUpperCase().charCodeAt(0);
+            newAr.push(lee);
             }
-        })()
+        }
+    })()
     }
     var errors = 0;
     capture = function (e) {
@@ -124,12 +126,13 @@ var endGame = (function() {
             (function() {
             try { clearInterval(thetimer); }
             catch (err) {if (err instanceof ReferenceError) {
-                console.log('');
+                
             }}
         })(),
         uncapture: (function(){
             try { document.removeEventListener('keydown', capture) }
-            catch (err) {if (err instanceof ReferenceError) { console.log('');}}
+            catch (err) {if (err instanceof ReferenceError) {}
+        }
         })()
     }
 });
