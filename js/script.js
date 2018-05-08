@@ -1,4 +1,3 @@
-
 var sentences = [
     sentence1 =  'The dog fell off a huge steep hill but he had no choice but to look around for his old friend. The two reunited again after a long two day journey home.',
     sentence2 =  'The thirsty impulse persuades the adjustment. The profit devises the tacky burst. The bouncy body check in the size.',
@@ -29,9 +28,10 @@ var startGame = (function(){
             var newtime = Date.now() - start;
             newtime = moment.duration(newtime).asSeconds();
 
-            $('.time').html(Math.round(newtime));
+            $('.time').html(Math.round(newtime) + ' sec');
         }, 1000);
     })(),
+    // random grabs a sentence in array
     getSen: (function(){
         for (var i = 0; i <= sentences.length; i++) {
             var random = Math.random(i) * Math.floor(sentences.length-1);
@@ -64,10 +64,12 @@ var startGame = (function(){
     capture = function (e) {
             var KeyCode = e.keyCode || e.which;
 
+            // push the keys inside array
             if (arfinal.length < newAr.length) {
                arfinal.push(KeyCode);
                validate(arfinal, newAr);
-            } else if (arfinal.length == newAr.length) {
+            } 
+            if (arfinal.length == newAr.length) {
                 validate(arfinal, newAr);
                 endGame();
             }
@@ -77,12 +79,12 @@ var startGame = (function(){
                 var thatIndex = a.lastIndexOf(lastIndex);
 
                 // console.log('lastindex typed' + lastIndex + 'the actual index' + thatIndex + 'newAr # of same index' + n[thatIndex]);
+                
 
                 if (!(lastIndex == n[thatIndex])) {
                     errors++;
                     $('.er').html('Errors: ' + errors);
                 }
-
                 // Convert Keycode to Character
                 var convert = String.fromCharCode(lastIndex).toLowerCase();
                 var div = $('.keys');
@@ -92,10 +94,13 @@ var startGame = (function(){
                         var d = div[i];
                     }
                 }
+                
                 $(d).css({ 'background-color': '#ded', 'box-shadow': '3px 3px #000'});
                 $(d).animate({ 'background-color':'#ded'},{duration:300,complete: function() {
                     $(this).css({'background-color': '#fff', 'box-shadow': '2px 2px #000'});
                 }});
+
+            
 
                 // ADD functionality to the pre!
                 var typed = picked[thatIndex].toUpperCase().charCodeAt(0);
